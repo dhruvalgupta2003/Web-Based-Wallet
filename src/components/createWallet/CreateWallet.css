@@ -1,0 +1,51 @@
+/* src/components/CreateWallet.css */
+.create-wallet {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  button {
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: #4256f4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .mnemonic-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  .mnemonic-box {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    /* background-color: #f7f7f7; */
+  }
+  
+  /* src/components/Wallet.css */
+  .wallet {
+    margin-top: 20px;
+  }
+  
+  .keys-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+    margin: 10px 0;
+  }
+  
+  .key-box {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    /* background-color: #f7f7f7; */
+    word-wrap: break-word;
+  }
+  

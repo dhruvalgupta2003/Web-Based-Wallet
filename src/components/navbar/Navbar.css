@@ -1,0 +1,39 @@
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--main-bg-color);
+  }
+
+  .navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+  
+  .navbar ul li {
+    cursor: pointer;
+  }
+  
+  .auth-buttons {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .sign-in {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .sign-up {
+    background-color: var(--main-sec-color);
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+  }
