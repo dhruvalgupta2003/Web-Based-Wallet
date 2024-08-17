@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import nacl from 'tweetnacl';
-import { mnemonicToSeed } from 'bip39';
+import { mnemonicToSeedSync } from 'bip39'; // Import mnemonicToSeedSync for synchronous operation
 import { derivePath } from 'ed25519-hd-key';
 import { Keypair } from '@solana/web3.js';
 import './Wallet.css';
@@ -10,7 +10,7 @@ const SolanaWallet = ({ mnemonic }: { mnemonic: string }) => {
   const [publicKeys, setPublicKeys] = useState<string[]>([]);
 
   const addWallet = () => {
-    const seed = mnemonicToSeed(mnemonic);
+    const seed = mnemonicToSeedSync(mnemonic); // Use mnemonicToSeedSync here
     const path = `m/44'/501'/${currentIndex}'/0'`;
     const derivedSeed = derivePath(path, seed.toString('hex')).key;
     const secret = nacl.sign.keyPair.fromSeed(derivedSeed).secretKey;
