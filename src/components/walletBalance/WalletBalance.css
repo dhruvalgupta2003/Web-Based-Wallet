@@ -1,0 +1,18 @@
+.wallet-balance {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: var(--main-bg-color);
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    text-align: center;
+    font-family: 'Arial', sans-serif; /* Font styling */
+    color: #fff; 
+}
+
+.wallet-balance h3 {
+margin: 0;
+font-size: 1.5em; /* Larger font size */
+font-weight: bold; /* Bold text */
+color: #28a745; /* Green text for balance */
+}
+  
