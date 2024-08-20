@@ -1,13 +1,26 @@
+import React, { useState } from 'react';
 import { generateMnemonic } from 'bip39';
-import { useState } from 'react';
 import SolanaWallet from '../wallets/SolanaWallet';
 import EthWallet from '../wallets/EthWallet';
 import './CreateWallet.css';
 
-const CreateWallet = () => {
+interface CreateWalletProps {
+  setSolanaWallets: React.Dispatch<React.SetStateAction<string[]>>;
+  setEthWallets: React.Dispatch<React.SetStateAction<string[]>>;
+}
+
+const CreateWallet: React.FC<CreateWalletProps> = ({ setSolanaWallets, setEthWallets }) => {
   const [mnemonic, setMnemonic] = useState<string>('');
 
-  const handleGenerateMnemonic = async () => {
+  const handleAddSolanaWallet = (publicKey: string) => {
+    setSolanaWallets(prevWallets => [...prevWallets, publicKey]);
+  };
+
+  const handleAddEthWallet = (address: string) => {
+    setEthWallets(prevWallets => [...prevWallets, address]);
+  };
+
+  const handleGenerateMnemonic = () => {
     const phrase = generateMnemonic();
     setMnemonic(phrase);
   };
@@ -27,8 +40,8 @@ const CreateWallet = () => {
       </div>
       {mnemonic && (
         <>
-          <SolanaWallet mnemonic={mnemonic} />
-          <EthWallet mnemonic={mnemonic} />
+          <SolanaWallet mnemonic={mnemonic} onAddWallet={handleAddSolanaWallet} />
+          <EthWallet mnemonic={mnemonic} onAddWallet={handleAddEthWallet} />
         </>
       )}
     </div>

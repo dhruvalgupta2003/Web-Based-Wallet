@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import './Navbar.css';
+import { Link } from "react-router-dom";
+import "./Navbar.css";
 
 const Navbar = () => {
   return (
@@ -12,15 +12,16 @@ const Navbar = () => {
           <Link to="/create-wallet">Create Wallet</Link>
         </li>
         <li>
-          <Link to="/">Planning</Link>
+          <Link to="/wallet-list">Go To Wallet</Link>
         </li>
         <li>
-          <Link to="/">About</Link>
+          <Link to="/">Change Network</Link>
         </li>
       </ul>
       <div className="auth-buttons">
-        <button className="sign-in">Sign In</button>
-        <button className="sign-up">Sign Up</button>
+        <Link to="/connect-wallet">
+          <button className="sign-up">Connect Wallet</button>
+        </Link>
       </div>
     </nav>
   );

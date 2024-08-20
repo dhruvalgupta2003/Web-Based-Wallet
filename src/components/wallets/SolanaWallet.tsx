@@ -7,7 +7,11 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Wallet.css';
 
-const SolanaWallet = ({ mnemonic }: { mnemonic: string }) => {
+interface SolanaWalletProps {
+  mnemonic: string;
+  onAddWallet: (publicKey: string) => void;
+}
+const SolanaWallet: React.FC<SolanaWalletProps>= ({ mnemonic, onAddWallet }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [publicKeys, setPublicKeys] = useState<string[]>([]);
   const navigate = useNavigate();
@@ -19,7 +23,9 @@ const SolanaWallet = ({ mnemonic }: { mnemonic: string }) => {
     const secret = nacl.sign.keyPair.fromSeed(derivedSeed).secretKey;
     const keypair = Keypair.fromSecretKey(secret);
     setCurrentIndex(currentIndex + 1);
-    setPublicKeys([...publicKeys, keypair.publicKey.toBase58()]);
+    const publicKey = keypair.publicKey.toBase58();
+    setPublicKeys([...publicKeys,publicKey]);
+    onAddWallet(publicKey);
   };
 
   const goToWallet = (index: number) => {

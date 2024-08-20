@@ -5,7 +5,11 @@ import './Wallet.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const EthWallet = ({ mnemonic }: { mnemonic: string }) => {
+interface EthWalletProps {
+  mnemonic: string;
+  onAddWallet: (address: string) => void;
+}
+const EthWallet: React.FC<EthWalletProps> = ({ mnemonic, onAddWallet}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [addresses, setAddresses] = useState<string[]>([]);
   const navigate = useNavigate();
@@ -18,6 +22,7 @@ const EthWallet = ({ mnemonic }: { mnemonic: string }) => {
     const wallet = new Wallet(child.privateKey);
     setCurrentIndex(currentIndex + 1);
     setAddresses([...addresses, wallet.address]);
+    onAddWallet(wallet.address)
   };
 
   const goToWallet = (index: number) => {

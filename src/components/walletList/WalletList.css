@@ -1,0 +1,64 @@
+/* General styles for the wallet list */
+.wallet-list {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--main-bg-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+/* Section headings for Solana and Ethereum wallets */
+.wallet-list h2 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    text-align: center;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+/* Styles for the unordered lists */
+.wallet-list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Styles for each list item */
+.wallet-list li {
+    margin: 10px 0;
+    font-size: 1rem;
+    background-color: var(--main-sec-color);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Hover effect for list items */
+.wallet-list li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Styles for the wallet links */
+.wallet-list a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Hover effect for wallet links */
+.wallet-list a:hover {
+    text-decoration: underline;
+}
+
+/* Truncate long wallet addresses with ellipsis */
+.wallet-list li p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+}
