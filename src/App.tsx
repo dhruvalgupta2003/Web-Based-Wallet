@@ -5,43 +5,62 @@ import Home from './components/homepage/Home';
 import CreateWallet from './components/createWallet/CreateWallet';
 import WalletBalance from './components/walletBalance/WalletBalance';
 import WalletList from './components/walletList/WalletList';
+import CreateTransaction from './components/connectWallet/CreateTransaction';
+import { WalletProvider } from '@solana/wallet-adapter-react';
+import { ConnectionProvider } from '@solana/wallet-adapter-react';
+// import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
+import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
 import './App.css';
-import ConnectWallet from './components/connectWallet/ConnectWallet';
 
 const App: React.FC = () => {
   const [solanaWallets, setSolanaWallets] = useState<string[]>([]);
   const [ethWallets, setEthWallets] = useState<string[]>([]);
 
+  // Set up wallets for Solana
+  const wallets = [new PhantomWalletAdapter()];
+
   return (
-    <Router>
-      <div className="App">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route 
-            path="/create-wallet" 
-            element={
-              <CreateWallet 
-                setSolanaWallets={setSolanaWallets}  
-                setEthWallets={setEthWallets}
+    <ConnectionProvider endpoint={'https://api.mainnet-beta.solana.com'}>
+      <WalletProvider wallets={wallets} autoConnect>
+        <Router>
+          <div className="App">
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route 
+                path="/create-wallet" 
+                element={
+                  <CreateWallet 
+                    setSolanaWallets={setSolanaWallets}  
+                    setEthWallets={setEthWallets}
+                  />
+                } 
               />
-            } 
-          />
-          <Route 
-            path="/wallet-list" 
-            element={
-              <WalletList 
-                solanaWallets={solanaWallets} 
-                ethWallets={ethWallets}
+              <Route 
+                path="/wallet-list" 
+                element={
+                  <WalletList 
+                    solanaWallets={solanaWallets} 
+                    ethWallets={ethWallets}
+                  />
+                } 
               />
-            } 
-          />
-          <Route path="/wallet-balance" element={<WalletBalance />} />
-          <Route path="/connect-wallet" element={<ConnectWallet />}/>
-        </Routes>
-      </div>
-    </Router>
+              <Route path="/wallet-balance" element={<WalletBalance />} />
+              <Route 
+                path="/create-transaction" 
+                element={
+                  <CreateTransaction 
+                    solanaWallets={solanaWallets} 
+                    ethWallets={ethWallets} 
+                  />
+                } 
+              />
+            </Routes>
+          </div>
+        </Router>
+      </WalletProvider>
+    </ConnectionProvider>
   );
-}
+};
 
 export default App;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { generateMnemonic } from 'bip39';
 import SolanaWallet from '../wallets/SolanaWallet';
 import EthWallet from '../wallets/EthWallet';
@@ -11,6 +11,16 @@ interface CreateWalletProps {
 
 const CreateWallet: React.FC<CreateWalletProps> = ({ setSolanaWallets, setEthWallets }) => {
   const [mnemonic, setMnemonic] = useState<string>('');
+  console.log(mnemonic);
+
+  useEffect(() => {
+    // Retrieve the menmoic from localstorage when the component mounts
+    const storedMnemoic = localStorage.getItem('mnemonic');
+    if(storedMnemoic){
+      setMnemonic(storedMnemoic)
+    }
+  },[])
+  
 
   const handleAddSolanaWallet = (publicKey: string) => {
     setSolanaWallets(prevWallets => [...prevWallets, publicKey]);
@@ -21,8 +31,12 @@ const CreateWallet: React.FC<CreateWalletProps> = ({ setSolanaWallets, setEthWal
   };
 
   const handleGenerateMnemonic = () => {
-    const phrase = generateMnemonic();
-    setMnemonic(phrase);
+    if(!mnemonic){
+      const phrase = generateMnemonic();
+      setMnemonic(phrase);
+      // store the mnemonic in localstorage
+      localStorage.setItem('mnemonic',phrase);
+    } 
   };
 
   const mnemonicWords = mnemonic ? mnemonic.split(' ') : [];
