@@ -40,11 +40,11 @@ const SolanaWallet: React.FC<SolanaWalletProps>= ({ mnemonic, onAddWallet }) => 
       .then((response) => {
         const value = response.data.result.value;
         const balance = value / 1_000_000_000; // Convert lamports to SOL
-        navigate('/wallet-balance', { state: { balance , currency: 'SOL'} });
+        navigate('/wallet-balance', { state: { balance , currency: 'SOL', publicKey: publicKey} });
       })
       .catch((error) => {
         console.error('Error fetching wallet info:', error);
-        navigate('/wallet-balance', { state: { balance: 0, currency: 'SOL' } });
+        navigate('/wallet-balance', { state: { balance: 0, currency: 'SOL', publicKey: publicKey } });
       });
   };
 

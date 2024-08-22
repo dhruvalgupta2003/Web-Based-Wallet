@@ -36,11 +36,11 @@ const EthWallet: React.FC<EthWalletProps> = ({ mnemonic, onAddWallet}) => {
     .then((response) => {
       const value = parseInt(response.data.result, 16); // Convert hex to decimal
       const balance = value / 1_000_000_000_000_000_000; // Convert wei to ETH
-      navigate('/wallet-balance', { state: { balance, currency: 'ETH' } });
+      navigate('/wallet-balance', { state: { balance, currency: 'ETH', publicKey: address} });
     })
     .catch((error) => {
       console.error('Error fetching wallet info:', error);
-      navigate('/wallet-balance', { state: { balance: 0, currency: 'ETH' } });
+      navigate('/wallet-balance', { state: { balance: 0, currency: 'ETH', publicKey: address } });
     });
   }
 

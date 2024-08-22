@@ -1,0 +1,72 @@
+/* CreateTransaction.css */
+
+.create-transaction {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid white;
+  }
+  
+  .create-transaction h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .create-transaction div {
+    margin-bottom: 15px;
+  }
+  
+  .create-transaction label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #fff;
+  }
+  
+  .create-transaction select,
+  .create-transaction input {
+    width: 70%;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .create-transaction select {
+    background-color: #ffffffe3;
+  }
+  
+  .create-transaction input {
+    background-color: #ffffffe3;
+  }
+  
+  .create-transaction button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .create-transaction button:hover {
+    background-color: #0056b3;
+  }
+  
+  .create-transaction button:active {
+    background-color: #004494;
+  }
+  
+  .create-transaction .btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
