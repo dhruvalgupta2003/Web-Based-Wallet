@@ -11,6 +11,8 @@ import { ConnectionProvider } from '@solana/wallet-adapter-react';
 // import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
 import './App.css';
+import GenerateQR from './components/generateQR/GenerateQR';
+import { PublicKey } from '@solana/web3.js';
 
 const App: React.FC = () => {
   const [solanaWallets, setSolanaWallets] = useState<string[]>([]);
@@ -55,6 +57,7 @@ const App: React.FC = () => {
                   />
                 } 
               />
+              <Route path='/generate-qr' element={<GenerateQR />} />
             </Routes>
           </div>
         </Router>

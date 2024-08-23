@@ -1,13 +1,12 @@
-import { useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
-import './WalletBalance.css';
 import { Connection, PublicKey } from '@solana/web3.js';
 import solIcon from '../../assets/sol.svg';
-import { Link } from 'react-router-dom';
 import ethIcon from '../../assets/eth.svg';
+import './WalletBalance.css';
 
-const WalletBalance = () => {
+const WalletBalance: React.FC = () => {
   const location = useLocation();
   const { currency = 'SOL', publicKey: publicKeyString } = location.state || {};
   const [balance, setBalance] = useState<number | null>(null);
@@ -18,7 +17,6 @@ const WalletBalance = () => {
   const [walletBalanceInUsd, setWalletBalanceInUsd] = useState<number | null>(null);
   const [showPublicKey, setShowPublicKey] = useState(false);
 
-  // Convert publicKeyString to a PublicKey object if it's a string
   const publicKey = publicKeyString ? new PublicKey(publicKeyString) : null;
 
   useEffect(() => {
@@ -28,7 +26,7 @@ const WalletBalance = () => {
           axios.get('https://api.coinpaprika.com/v1/tickers/sol-solana'),
           axios.get('https://api.coinpaprika.com/v1/tickers/eth-ethereum')
         ]);
-        // Set up connection to the Solana devnet
+
         const connection = new Connection("https://api.devnet.solana.com");
 
         const solData = solResponse.data;
@@ -44,14 +42,12 @@ const WalletBalance = () => {
         setSolPercentChange15m(solChange15m);
         setEthPercentChange15m(ethChange15m);
 
-        const rate = currency === 'SOL' ? solRate : ethRate;
-        
         if (publicKey) {
           let latestBalance = await connection.getBalance(publicKey);
-          latestBalance = latestBalance / 1000_000_000
+          latestBalance = latestBalance / 1000_000_000;
           setBalance(latestBalance);
 
-          const balanceInUsd = latestBalance * rate;
+          const balanceInUsd = latestBalance * (currency === 'SOL' ? solRate : ethRate);
           setWalletBalanceInUsd(balanceInUsd);
         }
       } catch (error) {
@@ -60,7 +56,7 @@ const WalletBalance = () => {
         setCurrentEthToUsdExRate(null);
         setSolPercentChange15m(null);
         setEthPercentChange15m(null);
-        setWalletBalanceInUsd(null); // Fallback to null for balance
+        setWalletBalanceInUsd(null);
       }
     };
 
@@ -92,7 +88,7 @@ const WalletBalance = () => {
     if (percentChange !== null) {
       return percentChange >= 0 ? 'positive' : 'negative';
     }
-    return 'neutral'; // Or 'loading' if you prefer a distinct style for loading
+    return 'neutral';
   };
 
   return (
@@ -113,12 +109,12 @@ const WalletBalance = () => {
       </div>
       <div className="action-buttons">
         <button>Deposit</button>
-        <Link to='/create-transaction' 
-        state={{ walletAddress: publicKeyString }} // Pass the public key as a state prop
-        >
+        <Link to='/create-transaction' state={{ walletAddress: publicKeyString }}>
           <button>Send</button>
         </Link>
-        <button>Scan</button>
+        <Link to='/generate-qr' state={{ publicKey: publicKeyString }}>
+          <button>Scan</button>
+        </Link>
       </div>
       <div className="available-tokens">
         <h4>Available Tokens</h4>
@@ -127,7 +123,7 @@ const WalletBalance = () => {
             <div className="token-left">
               <img src={currency === 'SOL' ? solIcon : ethIcon} alt={currency} />
               <div className="token-info">
-                <span className="token-name">{currency === "SOL" ? "Solana" : "Ethereum"}</span>
+                <span className="token-name">{currency === 'SOL' ? 'Solana' : 'Ethereum'}</span>
                 <span className="token-amount">{balance ? balance.toFixed(2) : 0} {currency}</span>
               </div>
             </div>

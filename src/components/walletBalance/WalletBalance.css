@@ -149,3 +149,6 @@
   .token-value .positive {
     color: #4caf50;
   }
+  .token-value .negative {
+    color: #db2f2f;
+  }
