@@ -12,7 +12,6 @@ import { ConnectionProvider } from '@solana/wallet-adapter-react';
 import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
 import './App.css';
 import GenerateQR from './components/generateQR/GenerateQR';
-import { PublicKey } from '@solana/web3.js';
 
 const App: React.FC = () => {
   const [solanaWallets, setSolanaWallets] = useState<string[]>([]);
